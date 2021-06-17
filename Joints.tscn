@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://blocks/SuspendedWall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://blocks/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://blocks/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/Joints.gd" type="Script" id=5]
+[ext_resource path="res://blocks/Plank.tscn" type="PackedScene" id=6]
+[ext_resource path="res://blocks/SpringVisualizer.tscn" type="PackedScene" id=7]
+
+[node name="Joints" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2( 649.35, 225.244 )
+node_a = NodePath("../PinAnchor")
+node_b = NodePath("../RotatingWall1")
+
+[node name="RotatingWall1" parent="." instance=ExtResource( 1 )]
+position = Vector2( 781.791, 225.244 )
+
+[node name="SuspendedWall" parent="." instance=ExtResource( 1 )]
+position = Vector2( 277.2, 427.791 )
+
+[node name="SpringVisualizer" parent="SuspendedWall" instance=ExtResource( 7 )]
+position = Vector2( -122.476, 5.74503 )
+external_anchor_path = NodePath("../../Wall/Position2D")
+
+[node name="SpringVisualizer2" parent="SuspendedWall" instance=ExtResource( 7 )]
+position = Vector2( 122.615, 0 )
+external_anchor_path = NodePath("../../Wall/Position2D2")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 154.724, 232.189 )
+node_a = NodePath("../Wall")
+node_b = NodePath("../SuspendedWall")
+length = 200.0
+rest_length = 100.0
+
+[node name="DampedSpringJoint2D2" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 399.815, 229.541 )
+node_a = NodePath("../Wall")
+node_b = NodePath("../SuspendedWall")
+length = 200.0
+rest_length = 100.0
+
+[node name="Wall" parent="." instance=ExtResource( 3 )]
+modulate = Color( 2, 0.49, 0.49, 1 )
+position = Vector2( 277.943, 231.586 )
+
+[node name="Position2D" type="Position2D" parent="Wall"]
+position = Vector2( -123.219, 0.60701 )
+
+[node name="Position2D2" type="Position2D" parent="Wall"]
+position = Vector2( 121.872, -2.045 )
+
+[node name="Wall2" parent="." instance=ExtResource( 3 )]
+modulate = Color( 2, 0.49, 0.49, 1 )
+position = Vector2( 582.348, 599.058 )
+
+[node name="Wall3" parent="." instance=ExtResource( 3 )]
+modulate = Color( 2, 0.49, 0.49, 1 )
+position = Vector2( 860.723, 602.02 )
+
+[node name="PinAnchor" type="StaticBody2D" parent="."]
+position = Vector2( 649.243, 225.244 )
+
+[node name="SwingJoint" type="PinJoint2D" parent="."]
+position = Vector2( 618.838, 495.359 )
+node_a = NodePath("../SwingAnchor")
+node_b = NodePath("../Plank")
+
+[node name="SwingAnchor" type="StaticBody2D" parent="."]
+position = Vector2( 618.838, 495.359 )
+
+[node name="DampedSpringJoint2D3" type="DampedSpringJoint2D" parent="."]
+position = Vector2( 906.557, 41.9291 )
+node_a = NodePath("../SpringAnchor")
+node_b = NodePath("../RotatingWall1")
+length = 180.0
+rest_length = 150.0
+stiffness = 44.0
+damping = 0.02
+
+[node name="SpringAnchor" type="StaticBody2D" parent="."]
+position = Vector2( 904.876, 41.9291 )
+
+[node name="Box" parent="." instance=ExtResource( 2 )]
+position = Vector2( 808.238, 468.545 )
+
+[node name="Box2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 936.932, 497.536 )
+
+[node name="Plank" parent="." instance=ExtResource( 6 )]
+position = Vector2( 649.827, 507.418 )
+rotation = 0.340339

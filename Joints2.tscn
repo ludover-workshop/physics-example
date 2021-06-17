@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://blocks/Poly.tscn" type="PackedScene" id=1]
+[ext_resource path="res://blocks/Box.tscn" type="PackedScene" id=2]
+[ext_resource path="res://blocks/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/MoveWithMouse.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Joints.gd" type="Script" id=5]
+[ext_resource path="res://blocks/Plank.tscn" type="PackedScene" id=6]
+[ext_resource path="res://blocks/SpringVisualizer.tscn" type="PackedScene" id=7]
+
+[node name="Joints2" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="GrooveSimple" type="Node2D" parent="."]
+
+[node name="Box" parent="GrooveSimple" instance=ExtResource( 2 )]
+position = Vector2( 127.661, 98.2926 )
+
+[node name="GrooveAnchor" type="StaticBody2D" parent="GrooveSimple"]
+position = Vector2( 128.781, 99.1557 )
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="GrooveSimple"]
+position = Vector2( 128.074, 98.4486 )
+rotation = -1.25583
+node_a = NodePath("../GrooveAnchor")
+node_b = NodePath("../Box")
+length = 300.0
+initial_offset = 1.0
+
+[node name="Trampoline" type="Node2D" parent="."]
+
+[node name="Box2" parent="Trampoline" instance=ExtResource( 2 )]
+position = Vector2( 300.012, 461.756 )
+
+[node name="TrampolineAnchor" type="StaticBody2D" parent="Trampoline"]
+position = Vector2( 299.148, 538.694 )
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="Trampoline"]
+position = Vector2( 299.518, 539.116 )
+rotation = 3.14159
+node_a = NodePath("../TrampolineAnchor")
+node_b = NodePath("../Box2")
+length = 200.0
+initial_offset = 80.0
+
+[node name="Wall" parent="Trampoline" instance=ExtResource( 3 )]
+position = Vector2( 199.5, 472 )
+rotation = 1.5708
+
+[node name="Wall2" parent="Trampoline" instance=ExtResource( 3 )]
+position = Vector2( 400.5, 465.5 )
+rotation = 1.5708
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Trampoline"]
+position = Vector2( 299.643, 538.948 )
+rotation = 3.14159
+node_a = NodePath("../TrampolineAnchor")
+node_b = NodePath("../Box2")
+length = 100.0
+rest_length = 100.0
+stiffness = 64.0
+damping = 0.05
+
+[node name="ComplexThing" type="Node2D" parent="."]
+
+[node name="Box" parent="ComplexThing" instance=ExtResource( 2 )]
+position = Vector2( 655.825, 335.816 )
+
+[node name="Box2" parent="ComplexThing" instance=ExtResource( 2 )]
+position = Vector2( 950.331, 336.293 )
+
+[node name="Wall" parent="ComplexThing" instance=ExtResource( 3 )]
+modulate = Color( 2, 0.5, 0.5, 1 )
+position = Vector2( 592.85, 587.235 )
+
+[node name="Wall2" parent="ComplexThing" instance=ExtResource( 3 )]
+modulate = Color( 2, 0.5, 0.5, 1 )
+position = Vector2( 905.247, 587.984 )
+
+[node name="Wall3" parent="ComplexThing" instance=ExtResource( 3 )]
+modulate = Color( 2, 0.5, 0.5, 1 )
+position = Vector2( 1038.6, 391.706 )
+rotation = -1.57079
+
+[node name="Wall4" parent="ComplexThing" instance=ExtResource( 3 )]
+modulate = Color( 2, 0.5, 0.5, 1 )
+position = Vector2( 1040.09, 148.98 )
+rotation = -1.57079
+
+[node name="Plank" parent="ComplexThing" instance=ExtResource( 6 )]
+position = Vector2( 802.128, 335.816 )
+script = ExtResource( 4 )
+
+[node name="Poly" parent="ComplexThing" instance=ExtResource( 1 )]
+position = Vector2( 599.269, 272.221 )
+
+[node name="SpringVisualizer" parent="ComplexThing/Poly" instance=ExtResource( 7 )]
+z_as_relative = false
+external_anchor_path = NodePath("../../Poly2")
+
+[node name="Poly2" parent="ComplexThing" instance=ExtResource( 1 )]
+position = Vector2( 509.784, 228.921 )
+
+[node name="PinJoint2D" type="PinJoint2D" parent="ComplexThing"]
+position = Vector2( 655.825, 336.293 )
+node_a = NodePath("../Plank")
+node_b = NodePath("../Box")
+softness = 2.03
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="ComplexThing"]
+position = Vector2( 950.331, 336.293 )
+node_a = NodePath("../Plank")
+node_b = NodePath("../Box2")
+softness = 2.03
+
+[node name="GrooveJoint2D" type="GrooveJoint2D" parent="ComplexThing"]
+position = Vector2( 717.877, 271.839 )
+rotation = 1.5708
+node_a = NodePath("../Box")
+node_b = NodePath("../Poly")
+length = 127.0
+initial_offset = 118.0
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="ComplexThing"]
+position = Vector2( 509, 229.5 )
+rotation = -1.14494
+node_a = NodePath("../Poly")
+node_b = NodePath("../Poly2")
+length = 100.0
+rest_length = 80.0
+stiffness = 49.9
+damping = 0.13

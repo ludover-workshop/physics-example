@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/Poly.gd" type="Script" id=1]
+
+[node name="Poly" type="RigidBody2D"]
+position = Vector2( 612.617, 214.156 )
+mass = 0.1
+script = ExtResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( 2.37482, -23.2049, 17.7255, -19.2003, 23.7322, -1.84749, 20.3952, 21.5122, 2.37482, 34.1932, -23.6545, 22.847, -28.3265, 0.15477, -17.6478, -17.8655 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

@@ -1,54 +1,31 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/Wood.png" type="Texture" id=1]
-[ext_resource path="res://assets/SoccerBall.png" type="Texture" id=2]
-[ext_resource path="res://Box.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/Ball.gd" type="Script" id=4]
+[ext_resource path="res://blocks/Box.tscn" type="PackedScene" id=1]
+[ext_resource path="res://blocks/Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Wood.png" type="Texture" id=3]
+[ext_resource path="res://scripts/MoveWithMouse.gd" type="Script" id=4]
+[ext_resource path="res://blocks/Wall.tscn" type="PackedScene" id=5]
 
-[sub_resource type="PhysicsMaterial" id=3]
-bounce = 0.6
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 50.1074
-
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 160.723, 32.9915 )
 
-[node name="Main" type="Node2D"]
+[node name="ForcesAndImpulse" type="Node2D"]
 
-[node name="Box" parent="." instance=ExtResource( 3 )]
+[node name="Box" parent="." instance=ExtResource( 1 )]
 position = Vector2( 826, 457 )
 
-[node name="Box2" parent="." instance=ExtResource( 3 )]
+[node name="Box2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 864.37, 329 )
 
-[node name="Box3" parent="." instance=ExtResource( 3 )]
+[node name="Box3" parent="." instance=ExtResource( 1 )]
 position = Vector2( 814.811, 201 )
 
-[node name="Ball" type="RigidBody2D" parent="."]
-position = Vector2( 68.6446, -73.7411 )
-physics_material_override = SubResource( 3 )
+[node name="Ball" parent="." instance=ExtResource( 2 )]
 script = ExtResource( 4 )
 
-[node name="SoccerBall" type="Sprite" parent="Ball"]
-texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource( 1 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 48.2114, 310.571 )
-rotation = 0.461873
-
-[node name="Wall" type="Sprite" parent="StaticBody2D"]
-rotation = 1.5708
-scale = Vector2( 0.26457, 0.26457 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 256, 1200 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource( 2 )
+[node name="StaticBody2D" parent="." instance=ExtResource( 5 )]
+position = Vector2( 45, 319 )
+rotation = 0.493546
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 326.34, 425.095 )
@@ -57,12 +34,12 @@ rotation = 0.244738
 [node name="Wall" type="Sprite" parent="StaticBody2D2"]
 rotation = 1.5708
 scale = Vector2( 0.26457, 0.26457 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 1200 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
 position = Vector2( 662.359, 555.978 )
@@ -70,12 +47,12 @@ position = Vector2( 662.359, 555.978 )
 [node name="Wall" type="Sprite" parent="StaticBody2D3"]
 rotation = 1.5708
 scale = Vector2( 0.26457, 0.26457 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 1200 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
 position = Vector2( 980.759, 557.237 )
@@ -83,12 +60,12 @@ position = Vector2( 980.759, 557.237 )
 [node name="Wall" type="Sprite" parent="StaticBody2D4"]
 rotation = 1.5708
 scale = Vector2( 0.26457, 0.26457 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 1200 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
 position = Vector2( 1029.4, 364.173 )
@@ -97,12 +74,12 @@ rotation = -1.5708
 [node name="Wall" type="Sprite" parent="StaticBody2D5"]
 rotation = 1.5708
 scale = Vector2( 0.26457, 0.26457 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 1200 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="."]
 position = Vector2( 1030.48, 84.4825 )
@@ -111,9 +88,9 @@ rotation = -1.5708
 [node name="Wall" type="Sprite" parent="StaticBody2D6"]
 rotation = 1.5708
 scale = Vector2( 0.26457, 0.26457 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 256, 1200 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
